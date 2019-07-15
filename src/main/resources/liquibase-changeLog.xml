@@ -1,0 +1,91 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="201907031951" author="oguz">
+        <createTable tableName="users">
+            <column name="id" type="int">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="username" type="varchar(50)"/>
+            <column name="password" type="varchar(50)"/>
+        </createTable>
+
+        <createSequence sequenceName="users_seq"/>
+
+        <insert tableName="users">
+            <column name="id" valueSequenceNext="users_seq"/>
+            <column name="username" value="admin"/>
+            <column name="password" value="admin"/>
+        </insert>
+
+        <insert tableName="users">
+            <column name="id" valueSequenceNext="users_seq"/>
+            <column name="username" value="oguz"/>
+            <column name="password" value="oguz123"/>
+        </insert>
+
+        <insert tableName="users">
+            <column name="id" valueSequenceNext="users_seq"/>
+            <column name="username" value="ahmet"/>
+            <column name="password" value="123456"/>
+        </insert>
+
+        <createTable tableName="country">
+            <column name="id" type="int">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="varchar(50)"/>
+        </createTable>
+
+        <createSequence sequenceName="county_seq"/>
+
+        <insert tableName="country">
+            <column name="id" valueSequenceNext="county_seq"/>
+            <column name="name" value="Almanya"/>
+        </insert>
+
+        <insert tableName="country">
+            <column name="id" valueSequenceNext="county_seq"/>
+            <column name="name" value="Belçika"/>
+        </insert>
+
+        <insert tableName="country">
+            <column name="id" valueSequenceNext="county_seq"/>
+            <column name="name" value="Cezayir"/>
+        </insert>
+
+        <insert tableName="country">
+            <column name="id" valueSequenceNext="county_seq"/>
+            <column name="name" value="Dominik Cumhuriyeti"/>
+        </insert>
+
+        <insert tableName="country">
+            <column name="id" valueSequenceNext="county_seq"/>
+            <column name="name" value="İspanya"/>
+        </insert>
+
+        <insert tableName="country">
+            <column name="id" valueSequenceNext="county_seq"/>
+            <column name="name" value="Rusya"/>
+        </insert>
+
+        <insert tableName="country">
+            <column name="id" valueSequenceNext="county_seq"/>
+            <column name="name" value="İtalya"/>
+        </insert>
+
+        <insert tableName="country">
+            <column name="id" valueSequenceNext="county_seq"/>
+            <column name="name" value="Türkiye"/>
+        </insert>
+
+        <insert tableName="country">
+            <column name="id" valueSequenceNext="county_seq"/>
+            <column name="name" value="Fransa"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>

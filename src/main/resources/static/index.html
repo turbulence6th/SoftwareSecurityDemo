@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Software Security Demo</title>
+    <link rel="stylesheet" href="bootstrap-4.3.1-dist/css/hacker.css"/>
+</head>
+<body>
+    <div class="navbar navbar-default navbar-static-top">
+        <div class="nav-bar-header">
+            <a class="navbar-brand" href="#">Software Security Demo</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="well">
+                    <form id="login-form" class="form-horizontal">
+                        <fieldset>
+                            <legend>Login Form</legend>
+                            <div class="form-group">
+                                <label for="username" class="col-md-2 control-label">Username</label>
+                                <div class="col-md-10">
+                                    <input type="text" id="username" class="form-control" autocomplete="off" placeholder="Username"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="password" class="col-md-2 control-label">Password</label>
+                                <div class="col-md-10">
+                                    <input type="text" id="password" class="form-control" autocomplete="off" placeholder="Password"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-2">
+
+                                </div>
+                                <div class="col-md-10">
+                                    <span id="login-info" class="help-block">
+
+                                    </span>
+                                </div>
+                            </div>
+                            <button type="button" id="login-submit" class="btn btn-default">Login</button>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="well">
+                    <form id="search-form" class="form-horizontal">
+                        <fieldset>
+                            <legend>Country Search</legend>
+                            <div class="form-group">
+                                <label for="criteria" class="col-md-2 control-label">Criteria</label>
+                                <div class="col-md-10">
+                                   <input type="text" id="criteria" class="form-control" autocomplete="off" placeholder="Criteria"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+
+                                <div id="search-table" class="col-md-12">
+
+                                </div>
+
+                            </div>
+                            <button type="button" id="search-submit" class="btn btn-default">Search</button>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="well">
+                    <form id="xxe-form" class="form-horizontal">
+                        <fieldset>
+                            <legend>Xml Area</legend>
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <textarea id="xxe-area" class="form-control" style="height: 200px">
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE foo [
+  <!ELEMENT foo ANY>
+  <!ENTITY xxe SYSTEM
+  "file:///home/turbulence6th/password.txt">
+]>
+<foo>
+  &xxe;
+</foo></textarea>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        /**
+         * LOGIN
+         */
+        let loginClick = () => {
+            let formData = new FormData();
+            formData.append('username', document.getElementById("username").value);
+            formData.append('password', document.getElementById("password").value);
+
+            fetch("/login", {
+                body: formData,
+                method: "post"
+            }).then(response => {
+                return response.text();
+            }).then(response => {
+                document.getElementById("login-info").innerText = response;
+            });
+        };
+
+        document.getElementById("login-form").addEventListener("keyup", function(event) {
+            if (event.key === 'Enter') {
+                loginClick();
+            }
+        });
+
+        document.getElementById("login-submit").onclick = loginClick;
+
+        /**
+         * SEARCH
+         */
+        let searchClick = () => {
+            fetch("/country/search?criteria=" + document.getElementById("criteria").value)
+            .then(response => {
+                return response.json();
+            }).then(response => {
+
+                let table = "<table class=\"table table-striped table-hover\">" +
+                    "<thead>" +
+                        "<tr>" +
+                            "<th>#</th>" +
+                            "<th>Name</th>" +
+                        "</tr>" +
+                    "</thead>" +
+                    "<tbody>";
+
+                for (let i = 0; i < response.length; i++) {
+                    let row = response[i];
+                    table += "<tr>" +
+                            "<td>" + row.id + "</td>" +
+                            "<td>" + row.name + "</td>" +
+                        "<tr>";
+                }
+
+                table += "</tbody>" +
+                    "</table>";
+
+                document.getElementById("search-table").innerHTML = table;
+            });
+        };
+
+        document.getElementById("search-form").addEventListener("keyup", function(event) {
+            if (event.key === 'Enter') {
+                searchClick();
+            }
+        });
+
+        document.getElementById("search-submit").onclick = searchClick;
+
+    </script>
+</body>
+</html>

