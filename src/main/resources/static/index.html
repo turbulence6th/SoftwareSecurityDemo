@@ -18,7 +18,7 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="well">
-                    <form id="login-form" class="form-horizontal">
+                    <div id="login-form" class="form-horizontal">
                         <fieldset>
                             <legend>Login Form</legend>
                             <div class="form-group">
@@ -45,13 +45,13 @@
                             </div>
                             <button type="button" id="login-submit" class="btn btn-default">Login</button>
                         </fieldset>
-                    </form>
+                    </div>
                 </div>
             </div>
 
             <div class="col-md-6">
                 <div class="well">
-                    <form id="search-form" class="form-horizontal">
+                    <div id="search-form" class="form-horizontal">
                         <fieldset>
                             <legend>Country Search</legend>
                             <div class="form-group">
@@ -69,7 +69,7 @@
                             </div>
                             <button type="button" id="search-submit" class="btn btn-default">Search</button>
                         </fieldset>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -77,7 +77,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="well">
-                    <form id="xxe-form" class="form-horizontal">
+                    <div id="xxe-form" class="form-horizontal">
                         <fieldset>
                             <legend>Xml Area</legend>
                             <div class="form-group">
@@ -101,7 +101,7 @@
                             </div>
                             <button type="button" id="xxe-submit" class="btn btn-default">Submit</button>
                         </fieldset>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -192,12 +192,6 @@
                 document.getElementById("xxe-info").innerText = response;
             });
         };
-
-        document.getElementById("xxe-form").addEventListener("keyup", function(event) {
-            if (event.key === 'Enter') {
-                xxeClick();
-            }
-        });
 
         document.getElementById("xxe-submit").onclick = xxeClick;
 

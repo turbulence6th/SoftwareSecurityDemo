@@ -24,7 +24,7 @@
         <insert tableName="users">
             <column name="id" valueSequenceNext="users_seq"/>
             <column name="username" value="oguz"/>
-            <column name="password" value="oguz123"/>
+            <column name="password" value="ultra"/>
         </insert>
 
         <insert tableName="users">
@@ -44,47 +44,47 @@
 
         <insert tableName="country">
             <column name="id" valueSequenceNext="county_seq"/>
-            <column name="name" value="Almanya"/>
+            <column name="name" value="Germany"/>
         </insert>
 
         <insert tableName="country">
             <column name="id" valueSequenceNext="county_seq"/>
-            <column name="name" value="Belçika"/>
+            <column name="name" value="Holland"/>
         </insert>
 
         <insert tableName="country">
             <column name="id" valueSequenceNext="county_seq"/>
-            <column name="name" value="Cezayir"/>
+            <column name="name" value="England"/>
         </insert>
 
         <insert tableName="country">
             <column name="id" valueSequenceNext="county_seq"/>
-            <column name="name" value="Dominik Cumhuriyeti"/>
+            <column name="name" value="Italy"/>
         </insert>
 
         <insert tableName="country">
             <column name="id" valueSequenceNext="county_seq"/>
-            <column name="name" value="İspanya"/>
+            <column name="name" value="Spain"/>
         </insert>
 
         <insert tableName="country">
             <column name="id" valueSequenceNext="county_seq"/>
-            <column name="name" value="Rusya"/>
+            <column name="name" value="Turkey"/>
         </insert>
 
         <insert tableName="country">
             <column name="id" valueSequenceNext="county_seq"/>
-            <column name="name" value="İtalya"/>
+            <column name="name" value="Japan"/>
         </insert>
 
         <insert tableName="country">
             <column name="id" valueSequenceNext="county_seq"/>
-            <column name="name" value="Türkiye"/>
+            <column name="name" value="Russia"/>
         </insert>
 
         <insert tableName="country">
             <column name="id" valueSequenceNext="county_seq"/>
-            <column name="name" value="Fransa"/>
+            <column name="name" value="Poland"/>
         </insert>
     </changeSet>
 
